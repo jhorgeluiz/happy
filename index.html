@@ -82,10 +82,10 @@
             if (e.key === 'Enter') {
                 const command = input.value.trim();
                 if (command in responses) {
-                    addMessage(`$ ${command}`);
+                    addMessage(`C:\Users> ${command}`);
                     addMessage(responses[command]);
                 } else {
-                    addMessage(`$ ${command}`);
+                    addMessage(`C:\Users> ${command}`);
                     addMessage("Comando não reconhecido. Tente novamente.");
                 }
                 input.value = '';
