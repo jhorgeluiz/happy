@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal de Aniversário</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            background: #1e1e1e;
+            color: #00ff00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .terminal {
+            width: 80%;
+            max-width: 800px;
+            height: 70%;
+            background: #000;
+            border: 3px solid #00ff00;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-y: auto;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        .input-line {
+            display: flex;
+        }
+
+        .input-line span {
+            margin-right: 5px;
+        }
+
+        .input-line input {
+            background: none;
+            border: none;
+            outline: none;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            flex: 1;
+        }
+
+        .message {
+            margin: 5px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="terminal" id="terminal">
+        <div class="message">Bem-vinda ao Terminal de Aniversário! 🎉</div>
+        <div class="message">Digite <code>npm_start</code> para começar.</div>
+        <div class="input-line">
+            <span>C:\Users></span>
+            <input type="text" id="input" autocomplete="off" >
+        </div>
+    </div>
+    
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        const input = document.getElementById('input');
+
+        const responses = {
+            npm_start: "🎂 Feliz Aniversário! Vamos começar. Digite <code>npm_run_dev</code> para continuar.",
+            npm_run_dev: "Você é uma pessoa incrível! ❤️ Obrigado por existir. TE AMO! Digite <code>git_commit</code> para receber seu presente.",
+            git_commit: "🎁 Feliz aniversário, meu amor! 🎉❤️Hoje é o dia em que o mundo ficou mais bonito, porque você veio ao mundo. Você é a luz da minha vida, minha melhor amiga, minha inspiração e minha maior felicidade.Eu sou imensamente grato por cada momento que compartilhamos, por cada sorriso seu que ilumina meu dia e por todo o amor que você me dá. Que este novo ano da sua vida seja repleto de realizações, aventuras incríveis e muito, muito amor.Saiba que estarei ao seu lado em cada passo, celebrando suas conquistas e te apoiando nos desafios. Você merece tudo de melhor, e eu farei o possível e o impossível para te ver feliz. Te amo mais do que palavras podem expressar. Hoje é o seu dia, e eu vou fazer de tudo para que ele seja inesquecível, assim como você é para mim. ❤️Parabéns, meu bem! 🥳💖 . Digite <code>exit</code> para finalizar.",
+            exit: "Terminal encerrado. Tenha um dia maravilhoso! 🌟"
+        };
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const command = input.value.trim();
+                if (command in responses) {
+                    addMessage(`$ ${command}`);
+                    addMessage(responses[command]);
+                } else {
+                    addMessage(`$ ${command}`);
+                    addMessage("Comando não reconhecido. Tente novamente.");
+                }
+                input.value = '';
+                terminal.scrollTop = terminal.scrollHeight;
+            }
+        });
+
+        function addMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'message';
+            div.innerHTML = text;
+            terminal.appendChild(div);
+        }
+    </script>
+</body>
+</html>
+
